@@ -23,7 +23,7 @@ is_display_ranking = False
 num_display_ranking = 3
 
 st.title("📊挑戦状況")
-background_image("pages/common/images/library.png")
+background_image("pages/common/images/background1.jpg")
 display_page_titles_sidebar()
 display_team_id_sidebar()
 get_team_id()
