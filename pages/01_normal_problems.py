@@ -25,7 +25,7 @@ from utils.attempt_limiter import check_is_failed, update_failed_status
 display_page_titles_sidebar()
 
 st.title("⚔️挑戦の場")
-background_image("pages/common/images/wars.png")
+background_image("pages/common/images/background1.jpg")
 
 team_id = get_team_id()
 if f"{team_id}_display_preparation_message" not in st.session_state:
@@ -33,9 +33,9 @@ if f"{team_id}_display_preparation_message" not in st.session_state:
 
 css_name = apply_default_custom_css()
 message = f"""
-    ほう、そなたらがかの **{team_id}** チームか。
+    いらっしゃい、**{team_id}** さん！
 
-    さあ、8つの知恵の的屋に挑戦し、クリスタルの力を取り戻すのだ
+    3つのクイズに挑戦して、ステッカーやノベルティをゲットしましょう！
     """
 display_applied_message(message, css_name)
 
@@ -58,7 +58,7 @@ for file in problem_files:
 tab_titles = []
 problem_ids = []
 state = {}
-state["team_id"] = session.get_current_user()[1:-1]
+state["team_id"] = st.session_state.team_id
 
 progress_text = "Loading..."
 progress_bar = st.progress(value=0, text=progress_text)
@@ -130,7 +130,7 @@ for i, problem_id in enumerate(tabs.keys()):
 
 success_placeholder = st.empty()
 if st.session_state[f"{team_id}_display_preparation_message"]:
-    success_placeholder.success("挑戦する準備が整ったようだ。")
+    success_placeholder.success("クイズの準備が整いました。")
     st.session_state[f"{team_id}_display_preparation_message"] = False
 else:
     success_placeholder.empty()
@@ -154,7 +154,7 @@ def update_selected_index():
 
 
 selected_problem = st.selectbox(
-    "挑戦する問題を選択してください",
+    "クイズを選択してください",
     options=tab_titles,
     index=st.session_state[selected_index_state_name],
     on_change=update_selected_index,
