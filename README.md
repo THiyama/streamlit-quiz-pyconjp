@@ -1,11 +1,11 @@
-# SWTT-Community
+# Streamlit-Quiz-PyConJP
 
 
 ## For Local Test
 ### Environment 
 ```sh
-py -3.10 -m venv swtt
-swtt\Scripts\activate
+py -3.10 -m venv st_quiz
+st_quiz\Scripts\activate
 
 pip install -r requirements.txt
 ```
