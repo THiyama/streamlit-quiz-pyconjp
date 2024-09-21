@@ -11,14 +11,7 @@ from utils.attempt_limiter import check_is_failed, update_failed_status
 
 
 TAB_TITLES = {
-    "be_positive": "Sentiment のど自慢🎤",
-    "whats_squad": "Community 魚すくい🐠",
-    "chat_with_ai": "Cortex 占い🔮",
-    "real_ice": "Open かき氷🧊",
-    "rsp": "Unistore じゃんけん大会✋️",
-    "nw_role": "Governance わさびたこ焼き🐙",
-    "sort_services": "Time Travel シューティング🔫",
-    "real_wanage": "Query 輪投げ➰️",
+    "sample": "Sample クイズ🎤",
 }
 
 
@@ -27,29 +20,6 @@ TAB_TITLES = {
 TEAMS = {
     "": "",
     "Account Admin": "Account_Admin",
-    "Business Critical": "BusinessCritical",
-    "Cortex": "Cortex",
-    "Data Clean Room": "DataCleanRoom",
-    "Enterprise Edition": "Enterprise_Edtion",
-    "Fail-Safe": "Fail_Safe",
-    "Git": "Git",
-    "Horizon": "Horizon",
-    "Iceberg": "Iceberg",
-    "JDBC": "JAROWINKLER_SIMILARITY",
-    "Knowledge": "Kafka",
-    "Lineage": "Lineage",
-    "Marketplace": "Marketplace",
-    "Notebooks": "Notebooks",
-    "OrgAdmin": "Org_Admin",
-    "POLARIS": "POLARIS",
-    "Quality Monitoring": "QualityMonitoring",
-    "Resource Monitor": "ResouceMonitor",
-    "Snowpark": "Snowpark",
-    "Trust Center": "TrustCenter",
-    "Universal Search": "UniversalSearch",
-    "Validate": "VARCHAR",
-    "WAREHOUSE": "WAREHOUSE",
-    "X-Small": "XS",
 }
 
 

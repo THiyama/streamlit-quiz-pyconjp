@@ -7,7 +7,6 @@ import importlib
 from utils.utils import (
     check_is_clear,
     update_clear_status,
-    reset_problem_status,
     display_page_titles_sidebar,
     display_team_id_sidebar,
     get_session,

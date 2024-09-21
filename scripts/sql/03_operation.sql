@@ -1,6 +1,6 @@
 -- データベース・スキーマ・ロール選択
 use role sysadmin;
-use database swtt_test;
+use database streamlit_quiz;
 use schema public;
 
 -- ウェアハウスのスケーリング変更クエリ
@@ -13,15 +13,15 @@ use role sysadmin; // SYSADMINに戻しておく。
 
 -- 各テーブルが空であることを確認する
 use role sysadmin; 
-select * from swtt_test.public.submit2;
+select * from streamlit_quiz.public.submit2;
 
 use role sysadmin;
-select * from swtt_test.public.hand_data;
+select * from streamlit_quiz.public.hand_data;
 
 -- 各テーブルがもし空でなかったら、このクエリを実行する。※ACCOUNTADMIN で実行しないように注意すること！！！
 use role sysadmin;
 /* // 本番中に誤って実行しないようにコメントアウト。
-create or replace TABLE SWTT_TEST.PUBLIC.SUBMIT2 (
+create or replace TABLE streamlit_quiz.PUBLIC.SUBMIT2 (
 	TEAM_ID VARCHAR(16777216),
 	PROBLEM_ID VARCHAR(16777216),
 	TIMESTAMP TIMESTAMP_NTZ(9),
@@ -33,7 +33,7 @@ create or replace TABLE SWTT_TEST.PUBLIC.SUBMIT2 (
 
 use role sysadmin;
 /* // 本番中に誤って実行しないようにコメントアウト。
-create or replace TABLE SWTT_TEST.PUBLIC.HAND_DATA (
+create or replace TABLE streamlit_quiz.PUBLIC.HAND_DATA (
 	ID NUMBER(38,0) autoincrement start 1 increment 1 noorder,
 	TEAM_ID VARCHAR(16777216),
 	HAND VARCHAR(1)
@@ -54,7 +54,7 @@ WHERE TRUE
 
 -- 特定の問題の回答状況水増しクエリ
 select * from submit2;
-INSERT INTO SWTT_TEST.PUBLIC.SUBMIT2 (TEAM_ID, PROBLEM_ID, TIMESTAMP, IS_CLEAR, KEY, MAX_ATTEMPTS)
+INSERT INTO streamlit_quiz.PUBLIC.SUBMIT2 (TEAM_ID, PROBLEM_ID, TIMESTAMP, IS_CLEAR, KEY, MAX_ATTEMPTS)
 SELECT SUBSTR(UUID_STRING(), 1, 10), 'be_positive', CURRENT_TIMESTAMP, TRUE, NULL, NULL;
 // 上の問題IDだけ変更する：be_positive, whats_squad, chat_with_ai, real_ice, rsp, nw_role, sort_services, real_wanage
 
