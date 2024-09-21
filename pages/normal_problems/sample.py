@@ -4,12 +4,11 @@ from snowflake.snowpark import Session
 from utils.utils import save_table, init_state, clear_submit_button
 from utils.attempt_limiter import check_is_failed, init_attempt, process_exceeded_limit
 
-MAX_ATTEMPTS_MAIN = 3
+MAX_ATTEMPTS_MAIN = 100
 
 
 def present_quiz(tab_name: str, max_attempts: int) -> str:
     st.write("Question 1: What is the capital of France?")
-    st.write(f"回答回数の上限は {max_attempts}回です。")
     answer = st.text_input("Your answer:", key=f"{tab_name}_answer")
 
     return answer

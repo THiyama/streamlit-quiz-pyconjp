@@ -78,7 +78,7 @@ def init_attempt(
     max_attempts: int, tab_name: str, session: Session, key: str = "main"
 ) -> AttemptLimiter:
     problem_id = tab_name
-    team_id = session.get_current_user()[1:-1]
+    team_id = st.session_state.team_id
 
     return AttemptLimiter(max_attempts, problem_id, team_id, session, key)
 

@@ -5,6 +5,10 @@ DEFAULT_TOP_TEXT_AREA = "custom-text-area"
 DEFAULT_HEADER_ANIMATION_AREA = "custom-animation-header-area"
 DEFAULT_PROBLEM_STATEMENT_AREA = "custom-problem-statement-area"
 
+bright_streamlit = "#ff4b4b"
+mid_streamlit = "#bd4043"
+dark_streamlit = "#7d353b"
+
 
 def apply_default_custom_css():
     st.markdown(
@@ -22,8 +26,12 @@ def apply_default_custom_css():
             background-color: #1e1e1e;  /* ダーク背景 */
             padding: 20px;
             border-radius: 10px;
-            border: 2px solid #11567F;  /* グレーのボーダー */
-            border-left: 5px solid #29B5E8;  /* Snowflake色のサイドライン */
+            border: 2px solid """
+        + dark_streamlit
+        + """;  /* グレーのボーダー */
+            border-left: 5px solid """
+        + mid_streamlit
+        + """;  /* Streamlit 色のサイドライン */
             color: #ffffff;  /* 白文字 */
             font-size: 16px;
             line-height: 1.6;
@@ -31,13 +39,17 @@ def apply_default_custom_css():
         ."""
         + DEFAULT_TOP_TEXT_AREA
         + """ h3 {
-            color: #5cc5eb;  /* 淡いSnowflake色 */
+            color: """
+        + bright_streamlit
+        + """;  /* 淡いSnowflake色 */
             text-shadow: 2px 2px #000000;  /* 影を付けて浮き上がる効果 */
         }
         ."""
         + DEFAULT_TOP_TEXT_AREA
         + """ strong {
-            color: #5cc5eb;  /* 強調部分も淡いSnowflake色に */
+            color: """
+        + bright_streamlit
+        + """;  /* 強調部分も淡いSnowflake色に */
         }
         ."""
         + DEFAULT_TOP_TEXT_AREA
