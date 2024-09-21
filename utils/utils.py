@@ -23,13 +23,34 @@ TEAMS = {
 }
 
 
+@st.dialog("ユーザー名の確認")
+def prompt_for_duplicate_username_continue(team_id: str) -> None:
+    st.write("ユーザー名がすでに登録されているようです。")
+    st.write("このまま続けますか？")
+
+    col1, col2 = st.columns(2)
+    if col1.button("はい"):
+        st.session_state[f"is_prompt_for_{team_id}"] = True
+        st.rerun()
+
+    if col2.button("いいえ"):
+        st.session_state[f"is_prompt_for_{team_id}"] = False
+        st.rerun()
+
+
+def is_team_id_exists(session: Session, team_id: int) -> bool:
+    result = session.table("Submit2").filter(F.col("TEAM_ID") == team_id).count()
+
+    return result > 0
+
+
 def create_session(team_id: str, is_info: bool = True) -> Session:
     try:
         session = st.connection(team_id, type="snowflake", max_entries=1).session()
         session.sql("SELECT 1").collect()
-        print("セッションの作成に成功しました。")
         if is_info:
-            st.success("データクリスタルとのリンクに成功したぞ。次なる試練へ進むのだ！")
+            pass
+            # st.success("データクリスタルとのリンクに成功したぞ。次なる試練へ進むのだ！")
         return session
 
     except SnowparkSQLException as e:
@@ -40,12 +61,15 @@ def create_session(team_id: str, is_info: bool = True) -> Session:
         session.sql("SELECT 1").collect()
         print("セッションの再作成に成功しました。")
         if is_info:
-            st.success("データクリスタルとのリンクに成功したぞ。次なる試練へ進むのだ！")
+            pass
+            # st.success("データクリスタルとのリンクに成功したぞ。次なる試練へ進むのだ！")
         return session
 
     except Exception as e:
         if is_info:
-            st.error("ふむ、、なにか問題が発生したようだな")
+            st.error(
+                "Snowflake との接続時に問題が発生したようです。スタッフに相談してみてください。"
+            )
             print(e)
             st.stop()
 
@@ -103,7 +127,7 @@ def init_state(tab_name: str, session: Session, max_attempts: int = 3):
 
     state = st.session_state.state
 
-    state["team_id"] = session.get_current_user()[1:-1]
+    state["team_id"] = st.session_state.team_id
     state["problem_id"] = tab_name
 
     state["is_clear"] = check_is_clear(session, state)
@@ -216,10 +240,10 @@ def reset_problem_status() -> None:
 def clear_submit_button(placeholder, state):
     if st.session_state[f"{state['problem_id']}_{state['team_id']}_is_clear"]:
         placeholder.empty()
-        placeholder.success("そなたらはすでにクリスタルのパワーを取り戻している！")
+        placeholder.success("このクイズには正解しました！")
     elif st.session_state[f"{state['problem_id']}_{state['team_id']}_is_failed"]:
         placeholder.empty()
-        placeholder.error("そなたらはクリスタルのパワーを使い切ってしまったようだ。")
+        placeholder.error("このクイズに挑戦するにはパワーが足りないみたいです。")
 
 
 def string_to_hash_int(base_string: str) -> int:
