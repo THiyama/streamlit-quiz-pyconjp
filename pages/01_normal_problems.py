@@ -50,6 +50,8 @@ problem_files = [f for f in os.listdir(problems_dir) if f.endswith(".py")]
 tabs = {}
 for file in problem_files:
     module_name = file[:-3]
+    if module_name not in TAB_TITLES:
+        continue
     module_path = f"pages.normal_problems.{module_name}"
     tabs[module_name] = importlib.import_module(module_path)
 
