@@ -7,32 +7,40 @@ from utils.attempt_limiter import check_is_failed, init_attempt, process_exceede
 
 MAX_ATTEMPTS_MAIN = 1000
 
+ANSWER_OPTIONS = [
+    "機械学習に用いるもの",
+    "データを可視化する際に用いるもの",
+    "インタラクティブなWebアプリを作るもの",
+    "大規模データベースを管理するもの",
+]
+
+
 def present_quiz(tab_name: str, max_attempts: int) -> str:
-    answer_option = [
-                     "機械学習に用いるもの",
-                     "データを可視化する際に用いるもの",
-                     "インタラクティブなWebアプリを作るもの",
-                     "大規模データベースを管理するもの"
-                     ]
+
     header_animation()
-    display_problem_statement(f"""
+    display_problem_statement(
+        f"""
                               <div>
                                 <p style="font-weight:bold; font-size: 24px; margin-bottom: 5px;">Streamlitは何のためのフレームワークでしょうか？</p>
                                 <p>※最も適切な選択肢を選んでください。</p>
                                 <ol style="margin-top: 20px; color:#333; font-size: 18px; font-weight:bold;">
-                                    <li style="margin: 7px 0 0 20px;">{answer_option[0]}</li>
-                                    <li style="margin: 7px 0 0 20px;">{answer_option[1]}</li>
-                                    <li style="margin: 7px 0 0 20px;">{answer_option[2]}</li>
-                                    <li style="margin: 7px 0 0 20px;">{answer_option[3]}</li>
+                                    <li style="margin: 7px 0 0 20px;">{ANSWER_OPTIONS[0]}</li>
+                                    <li style="margin: 7px 0 0 20px;">{ANSWER_OPTIONS[1]}</li>
+                                    <li style="margin: 7px 0 0 20px;">{ANSWER_OPTIONS[2]}</li>
+                                    <li style="margin: 7px 0 0 20px;">{ANSWER_OPTIONS[3]}</li>
                                 </ol>
                               </div>
-                              """)
-    st.html("""<p style="font-weight:bold; font-size: 24px; margin-bottom: 0;">Your answer:</p>""")
-    answer = st.radio("", answer_option, index=None)
+                              """
+    )
+    st.html(
+        """<p style="font-weight:bold; font-size: 24px; margin-bottom: 0;">Your answer:</p>"""
+    )
+    answer = st.radio("", ANSWER_OPTIONS, index=None)
     return answer
 
+
 def process_answer(answer: str, state, session: Session) -> None:
-    correct_answer = "PythonでインタラクティブなWebアプリを作るもの"
+    correct_answer = ANSWER_OPTIONS[3]
     if answer.lower() == correct_answer.lower():
         state["is_clear"] = True
         st.success("クイズに正解しました")
@@ -40,6 +48,7 @@ def process_answer(answer: str, state, session: Session) -> None:
         state["is_clear"] = False
         st.error("不正解です")
     save_table(state, session)
+
 
 def run(tab_name: str, session: Session):
     state = init_state(tab_name, session, MAX_ATTEMPTS_MAIN)
