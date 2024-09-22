@@ -82,7 +82,7 @@ def display_applied_message(message: str, css_name: str = DEFAULT_TOP_TEXT_AREA)
 @st.cache_data
 def header_animation(
     css_name: str = DEFAULT_HEADER_ANIMATION_AREA,
-    image_file: str = "pages/common/images/sky.png",
+    image_file: str = "pages/common/images/background1.jpg",
 ) -> None:
     import base64
 
@@ -171,7 +171,7 @@ def display_problem_statement(
 
 @st.cache_data
 def background_image(
-    image_file: str = "pages/common/images/sky.png", dark_mode: bool = True
+    image_file: str = "pages/common/images/background1.jpg", dark_mode: bool = True
 ):
     import base64
 
