@@ -79,8 +79,8 @@ def create_session(team_id: str, is_info: bool = True) -> Session:
 
 def get_session():
     if "snow_session" not in st.session_state:
-        st.warning("そなたらは、まだチームとして誓いが結ばれていないようだの・・・。")
-        if st.button("チーム結集に戻る"):
+        st.warning("ユーザー名の入力ができていないようです。")
+        if st.button("ユーザー名入力に戻る"):
             st.switch_page("app.py")
         st.stop()
     else:
@@ -102,9 +102,9 @@ def display_team_id_sidebar():
         try:
             st.divider()
             if "team_id" in st.session_state:
-                st.write(f"チーム名: {st.session_state.team_id}")
+                st.write(f"ユーザー名: {st.session_state.team_id}")
             else:
-                st.write(f"チーム名: 未結成")
+                st.write(f"ユーザー名: 未結成")
         except AttributeError as e:
             print(e)
 
@@ -115,8 +115,8 @@ def display_team_id():
 
 def get_team_id():
     if "team_id" not in st.session_state:
-        st.warning("そなたらは、まだチームとして誓いが結ばれていないようだの・・・。")
-        if st.button("チーム結集に戻る"):
+        st.warning("ユーザー名の入力ができていないようです。")
+        if st.button("ユーザー名入力に戻る"):
             st.switch_page("app.py")
         st.stop()
     else:
@@ -161,7 +161,7 @@ def save_table(state: dict, session: Session):
         ],
     )
 
-    with st.spinner("クリスタルと通信中..."):
+    with st.spinner("クリスタルと通信中... 少しお待ち下さい"):
         # session.write_pandas(df, "SUBMIT2", auto_create_table=False, overwrite=False)
         snow_df = session.create_dataframe(df)
         snow_df.write.mode("append").save_as_table("submit2")
@@ -182,6 +182,7 @@ def save_table(state: dict, session: Session):
                     f"{state['problem_id']}_{state['team_id']}_is_clear"
                 ] = True
 
+                st.info("クリスタルへの書き込みが完了しました。")
                 st.rerun()
 
         else:
@@ -203,6 +204,7 @@ def save_table(state: dict, session: Session):
                     f"{state['problem_id']}_{state['team_id']}_is_failed"
                 ] = True
 
+                st.info("クリスタルへの書き込みが完了しました。")
                 st.rerun()
 
 

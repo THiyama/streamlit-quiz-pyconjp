@@ -20,7 +20,11 @@ from utils.designs import (
 )
 from utils.attempt_limiter import check_is_failed, update_failed_status
 
-# with Profiler():  # 性能調査をする場合はコメントアウトを外して下記コードをすべてインデント下げる。
+
+@st.cache_resource
+def get_module(module_path: str):
+    return importlib.import_module(module_path)
+
 
 display_page_titles_sidebar()
 
@@ -53,7 +57,7 @@ for file in problem_files:
     if module_name not in TAB_TITLES:
         continue
     module_path = f"pages.normal_problems.{module_name}"
-    tabs[module_name] = importlib.import_module(module_path)
+    tabs[module_name] = get_module(module_path)
 
 tab_titles = []
 problem_ids = []
