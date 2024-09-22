@@ -14,6 +14,8 @@ ANSWER_OPTIONS = [
     "大規模データベースを管理するもの",
 ]
 
+ANSWER_OPTION = 2
+
 
 def present_quiz(tab_name: str, max_attempts: int) -> str:
 
@@ -40,7 +42,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
 
 
 def process_answer(answer: str, state, session: Session) -> None:
-    correct_answer = ANSWER_OPTIONS[3]
+    correct_answer = ANSWER_OPTIONS[ANSWER_OPTION]
     if answer.lower() == correct_answer.lower():
         state["is_clear"] = True
         st.success("クイズに正解しました")
