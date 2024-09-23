@@ -1,5 +1,6 @@
 import re
 import streamlit as st
+from typing import Optional
 from snowflake.snowpark import Session
 from snowflake.cortex import Complete as CompleteText
 
@@ -30,7 +31,7 @@ def display_chat_history(chat_container) -> None:
                 st.markdown(message["content"])
 
 
-def ai_problem(tab_name: str, max_attempts: int, session: Session) -> str:
+def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[str]:
     """AI問題の作成
 
     Args:
@@ -42,16 +43,21 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> str:
         str: ユーザーが選択した答え。
     """
     header_animation()
-    st.header("あなたはだ〜れ？？？", divider="rainbow")
+    st.header("このひとだあれ？？？", divider="rainbow")
 
     display_problem_statement(
         """
-                              <i>“あなたはだ〜れ？？？。
+                              <i>このひとだあれ？？？。
                               あなたは会話からその人が誰なのかを水平思考で考えてみてください</i><br />
                               <br />
-                              ヒントは頭脳は大人...
+                              職業を聞いてみよう！
                               """
     )
+    expander = st.expander("ヒント💡")
+    expander.write("""
+    私はStreamlitの共同創業者です！ペットは犬を飼っています
+    """)
+    expander.image("pages/common/images/user_image.png", width=300)
 
     initialize_chat_history()
 
@@ -81,7 +87,12 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> str:
             st.rerun()  # メッセージが更新されたら再描画
 
     st.divider()
-    answer = st.text_area(" ")
+    # ラジオボタンの選択肢を定義（番号付き）
+    choices = ["1. Guido van Rossum", "2. Amanda Kelly", "3. Sergey Mikhailovich Brin", "4. Denise Persson"]
+
+    # ラジオボタンの作成
+    answer = st.radio("選択してください:", choices)
+
     return answer
 
 
@@ -105,12 +116,9 @@ def call_cortex_ai_model(
     制約：
     あなたのプロフィール情報は以下です。ユーザーからの質問にたいしてプロフィール情報を元に回答してください。
     - 名前:??????
-    - 年齢:6
-    - 性別：男
-    - 仕事：小学生
-    - 体重:18kg
-    - 血液型:不明
-    - 誕生日:5月4日
+    - 性別：女
+    - 仕事:Snowflake Streamlitプロダクトディレクター
+    - 住所:北カリフォルニア
     Context: {context_str}
     Question: {prompt}
     Answer:
@@ -128,7 +136,8 @@ def process_answer(answer: str, state: dict, session: Session) -> None:
         session (Session): Snowflakeセッション。
     """
     # 正解判定
-    if bool(re.search(r"コナン", answer)):
+    selected_number = int(answer.split(".")[0])
+    if selected_number == 2:
         state["is_clear"] = True
         st.success("クイズに正解しました")
     else:
