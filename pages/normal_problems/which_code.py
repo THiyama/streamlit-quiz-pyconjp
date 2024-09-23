@@ -106,7 +106,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     return answer
 
 
-def process_answer(answer: str, state, session: Session) -> None:#
+def process_answer(answer: str, state, session: Session) -> None:
     correct_answer = "No.3"
     if answer.lower() == correct_answer.lower():
         state["is_clear"] = True
