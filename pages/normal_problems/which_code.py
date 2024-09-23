@@ -36,8 +36,8 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
             )
         except:
             st.error("日付を指定してください。")
-
     # 回答選択肢表示(No.1~No.3)
+    # No.1
     st.html(
         """<p style="font-weight:bold; font-size: 20px; margin-bottom: 0;">No.1</p>"""
     )
@@ -48,6 +48,9 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
         st.line_chart(chart_data[date_range[0] : date_range[1]])
             """
     )
+    with st.expander("ヒント：「st.number_input」"):
+        st.number_input('「st.number_input」の実装例です。')
+    # No.2
     st.html(
         """<p style="font-weight:bold; font-size: 20px; margin-bottom: 0;">No.2</p>"""
     )
@@ -63,6 +66,14 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
         st.line_chart(chart_data[date_range[0] : date_range[1]])
             """
     )
+    with st.expander("ヒント：「st.slider」"):
+        st.slider(
+            "「st.slider」の実装例です。", 
+            value=(40, 60),
+            min_value=0,
+            max_value=100
+            )
+    # No.3
     st.html(
         """<p style="font-weight:bold; font-size: 20px; margin-bottom: 0;">No.3</p>"""
     )
@@ -79,7 +90,15 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
         st.line_chart(chart_data[date_range[0] : date_range[1]])
             """
     )
-
+    with st.expander("ヒント：「st.date_input」"):
+        st.date_input(
+            "「st.date_input」の実装例です。",
+            value=(date(2024, 8, 10), date(2024, 8, 15)),
+            min_value=date(2024, 8, 1),
+            max_value=date(2024, 8, 31),
+            format="YYYY/MM/DD",
+        )
+    # 回答
     st.html(
         """<p style="font-weight:bold; font-size: 24px; margin-bottom: 0;">Your answer:</p>"""
     )
@@ -87,7 +106,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     return answer
 
 
-def process_answer(answer: str, state, session: Session) -> None:
+def process_answer(answer: str, state, session: Session) -> None:#
     correct_answer = "No.3"
     if answer.lower() == correct_answer.lower():
         state["is_clear"] = True
