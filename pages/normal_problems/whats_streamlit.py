@@ -8,10 +8,10 @@ from utils.attempt_limiter import check_is_failed, init_attempt, process_exceede
 MAX_ATTEMPTS_MAIN = 1000
 
 ANSWER_OPTIONS = [
-    "機械学習に用いるもの",
-    "データを可視化する際に用いるもの",
-    "インタラクティブなWebアプリを作るもの",
-    "大規模データベースを管理するもの",
+    "データベース管理ツール",
+    "機械学習用のトレーニングフレームワーク",
+    "Webアプリを簡単に作成するPythonライブラリ",
+    "Pythonコードのエラーチェックツール",
 ]
 
 ANSWER_OPTION = 2
