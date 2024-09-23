@@ -23,7 +23,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     display_problem_statement(
         f"""
                               <div>
-                                <p style="font-weight:bold; font-size: 24px; margin-bottom: 5px;">Streamlitは何のためのフレームワークでしょうか？</p>
+                                <p style="font-weight:bold; font-size: 24px; margin-bottom: 5px;">Streamlitとは？</p>
                                 <p>※最も適切な選択肢を選んでください。</p>
                                 <ol style="margin-top: 20px; color:#333; font-size: 18px; font-weight:bold;">
                                     <li style="margin: 7px 0 0 20px;">{ANSWER_OPTIONS[0]}</li>
