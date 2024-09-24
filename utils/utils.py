@@ -11,7 +11,6 @@ from utils.attempt_limiter import check_is_failed, update_failed_status
 
 
 TAB_TITLES = {
-    "sample": "Sample クイズ🎤",
     "whats_streamlit": "Streamlitとは？",
     "which_code": "どのコードが正しい？",
     "chat_quiz": "このひとだあれ",
@@ -24,6 +23,15 @@ TEAMS = {
     "": "",
     "Account Admin": "Account_Admin",
 }
+
+
+def check_all_clear(team_id):
+    # チームIDに関連するすべての "_is_clear" フラグが True かどうか確認
+    return all(
+        st.session_state[key]
+        for key in st.session_state
+        if key.endswith(f"_{team_id}_is_clear")
+    )
 
 
 @st.cache_resource(ttl=3600)
@@ -141,7 +149,7 @@ def save_table(state: dict, session: Session):
         ],
     )
 
-    with st.spinner("クリスタルと通信中... 少しお待ち下さい"):
+    with st.spinner("Snowflake と通信中... 少しお待ち下さい"):
         # session.write_pandas(df, "SUBMIT2", auto_create_table=False, overwrite=False)
         snow_df = session.create_dataframe(df)
         snow_df.write.mode("append").save_as_table("submit2")
