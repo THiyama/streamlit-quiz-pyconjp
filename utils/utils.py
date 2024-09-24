@@ -151,10 +151,10 @@ def save_table(state: dict, session: Session):
 
     with st.spinner("Snowflake と通信中... 少しお待ち下さい"):
         # session.write_pandas(df, "SUBMIT2", auto_create_table=False, overwrite=False)
-        snow_df = session.create_dataframe(df)
-        snow_df.write.mode("append").save_as_table("submit2")
 
         if state["is_clear"]:
+            snow_df = session.create_dataframe(df)
+            snow_df.write.mode("append").save_as_table("submit2")
             # はじめてのクリアの場合、if文内のロジックを実行する。
             if not st.session_state[
                 f"{state['problem_id']}_{state['team_id']}_is_clear"
@@ -170,7 +170,6 @@ def save_table(state: dict, session: Session):
                     f"{state['problem_id']}_{state['team_id']}_is_clear"
                 ] = True
 
-                st.info("クリスタルへの書き込みが完了しました。")
                 st.rerun()
 
         else:
@@ -192,7 +191,6 @@ def save_table(state: dict, session: Session):
                     f"{state['problem_id']}_{state['team_id']}_is_failed"
                 ] = True
 
-                st.info("クリスタルへの書き込みが完了しました。")
                 st.rerun()
 
 
