@@ -49,7 +49,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
             """
     )
     with st.expander("ヒント：「st.number_input」"):
-        st.number_input('「st.number_input」の実装例です。')
+        st.number_input("「st.number_input」の実装例です。")
     # No.2
     st.html(
         """<p style="font-weight:bold; font-size: 20px; margin-bottom: 0;">No.2</p>"""
@@ -68,11 +68,8 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     )
     with st.expander("ヒント：「st.slider」"):
         st.slider(
-            "「st.slider」の実装例です。", 
-            value=(40, 60),
-            min_value=0,
-            max_value=100
-            )
+            "「st.slider」の実装例です。", value=(40, 60), min_value=0, max_value=100
+        )
     # No.3
     st.html(
         """<p style="font-weight:bold; font-size: 20px; margin-bottom: 0;">No.3</p>"""
@@ -102,7 +99,11 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     st.html(
         """<p style="font-weight:bold; font-size: 24px; margin-bottom: 0;">Your answer:</p>"""
     )
-    answer = st.radio("", ["No.1", "No.2", "No.3"], index=None)
+    answer = st.radio(
+        "",
+        ["No.1: st.number_input", "No.2: st.slider", "No.3: st.date_input"],
+        index=None,
+    )
     return answer
 
 
