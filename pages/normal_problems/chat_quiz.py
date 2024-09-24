@@ -54,9 +54,11 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
                               """
     )
     expander = st.expander("ヒント💡")
-    expander.write("""
+    expander.write(
+        """
     私はStreamlitの共同創業者です！ペットは犬を飼っています
-    """)
+    """
+    )
     expander.image("pages/common/images/user_image.png", width=300)
 
     initialize_chat_history()
@@ -88,10 +90,15 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
 
     st.divider()
     # ラジオボタンの選択肢を定義（番号付き）
-    choices = ["1. Guido van Rossum", "2. Amanda Kelly", "3. Sergey Mikhailovich Brin", "4. Denise Persson"]
+    choices = [
+        "1. Guido van Rossum",
+        "2. Amanda Kelly",
+        "3. Sergey Mikhailovich Brin",
+        "4. Denise Persson",
+    ]
 
     # ラジオボタンの作成
-    answer = st.radio("選択してください:", choices)
+    answer = st.radio("選択してください:", choices, index=None)
 
     return answer
 
