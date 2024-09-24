@@ -78,10 +78,6 @@ if "is_submitted_main_page" not in st.session_state:
 
 st.button("挑戦を開始する", on_click=confirm_duplicate_username)
 
-print()
-print(
-    f"st.session_state.is_submitted_main_page: {st.session_state.is_submitted_main_page}"
-)
 if st.session_state.is_submitted_main_page:
     if team_id == "":
         st.error("ユーザー名を入力してみましょう！")
