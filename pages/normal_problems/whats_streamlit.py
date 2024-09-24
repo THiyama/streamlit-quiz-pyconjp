@@ -8,10 +8,10 @@ from utils.attempt_limiter import check_is_failed, init_attempt, process_exceede
 MAX_ATTEMPTS_MAIN = 1000
 
 ANSWER_OPTIONS = [
-    "機械学習に用いるもの",
-    "データを可視化する際に用いるもの",
-    "インタラクティブなWebアプリを作るもの",
-    "大規模データベースを管理するもの",
+    "データベース管理ツール",
+    "機械学習用のトレーニングフレームワーク",
+    "Webアプリを簡単に作成するPythonライブラリ",
+    "Pythonコードのエラーチェックツール",
 ]
 
 ANSWER_OPTION = 2
@@ -23,7 +23,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     display_problem_statement(
         f"""
                               <div>
-                                <p style="font-weight:bold; font-size: 24px; margin-bottom: 5px;">Streamlitは何のためのフレームワークでしょうか？</p>
+                                <p style="font-weight:bold; font-size: 24px; margin-bottom: 5px;">Streamlitとは？</p>
                                 <p>※最も適切な選択肢を選んでください。</p>
                                 <ol style="margin-top: 20px; color:#333; font-size: 18px; font-weight:bold;">
                                     <li style="margin: 7px 0 0 20px;">{ANSWER_OPTIONS[0]}</li>
