@@ -6,6 +6,7 @@ import importlib
 
 from utils.utils import (
     check_is_clear,
+    check_all_clear,
     update_clear_status,
     display_page_titles_sidebar,
     display_team_id_sidebar,
@@ -92,6 +93,7 @@ for i, problem_id in enumerate(tabs.keys()):
 
         # クリアフラグを追加するIFステートメント
         if check_is_clear(session, state):
+
             checker = "✅️ "
             st.session_state[f"{state['problem_id']}_{state['team_id']}_is_clear"] = (
                 True
@@ -127,10 +129,21 @@ for i, problem_id in enumerate(tabs.keys()):
     )
     problem_ids.append(problem_id)
 
-# st.button(
-#    "クリスタルの復活状況を更新する",
-#    on_click=reset_problem_status,
-# )
+print(check_all_clear(state["team_id"]))
+if check_all_clear(state["team_id"]):
+    st.balloons()
+    st.balloons()
+    st.balloons()
+    st.success(
+        """
+        あなたはすべてのクイズに正解しました！
+        ステッカーをスタッフから受け取ってください。
+        Streamlit Forum に登録することで、さらにノベルティをゲットできます！
+    """
+    )
+    if st.button("さらなるノベルティ獲得に進む", type="primary"):
+        st.switch_page("pages/02_get_additional_novelty.py")
+
 
 success_placeholder = st.empty()
 if st.session_state[f"{team_id}_display_preparation_message"]:
