@@ -18,7 +18,7 @@ from utils.designs import (
 )
 
 
-CLEAR_COUNT = 12
+CLEAR_COUNT = 100
 is_display_ranking = False
 num_display_ranking = 3
 
@@ -32,7 +32,7 @@ with st.sidebar:
     display_on_pc = st.toggle("文字サイズ：大")
 
 css_name = apply_default_custom_css()
-message = "ここでは、現在の各チームの挑戦状況を確認できるぞ。\n\nそなたらもどんどん挑戦して進むのだ！"
+message = "ここでは、現在の挑戦状況を確認できます。\n\n"
 display_applied_message(message, css_name)
 st.write("")
 
@@ -59,7 +59,7 @@ for problem_id in problem_ids:
         st.session_state[f"{problem_id}_is_over_clear"] = False
 
 
-st.subheader("問題ごとの正解チーム数")
+st.subheader("問題ごとの正解数")
 chart_placeholder = st.empty()
 
 
@@ -83,17 +83,6 @@ def update_chart():
 
     result["color"] = "#29B5E8"  # デフォルトカラー（薄いSnowflake色）
 
-    # 雪を降らせる処理
-    for index, row in result.iterrows():
-        if row["IS_CLEAR"] >= CLEAR_COUNT:
-            result.at[index, "color"] = "#c2e5f2"  # 色を薄い青色に変更
-
-            # クリアカウントを超えた場合の通知の表示と雪を降らせる処理
-            if not st.session_state[f"{row['problem_id']}_is_over_clear"]:
-                st.success(f"「{row['problem_name'][:-1]}」の的屋が解放されたようだ！")
-                st.snow()
-                st.session_state[f"{row['problem_id']}_is_over_clear"] = True
-
     fig = px.bar(
         result,
         x="problem_name",
@@ -110,8 +99,7 @@ def update_chart():
         fig.update_layout(height=600, width=1000)
 
         fig.update_layout(
-            xaxis_range=[-0.5, 7.5],
-            yaxis_range=[0, 25],
+            xaxis_range=[-0.5, 2.5],
             plot_bgcolor="rgba(30, 30, 30, 0.7)",
             paper_bgcolor="rgba(10, 10, 10, 0.5)",
             yaxis_title_font_size=26,
@@ -119,20 +107,10 @@ def update_chart():
 
     else:
         fig.update_layout(
-            xaxis_range=[-0.5, 7.5],
-            yaxis_range=[0, 25],
+            xaxis_range=[-0.5, 2.5],
             plot_bgcolor="rgba(30, 30, 30, 0.7)",
             paper_bgcolor="rgba(10, 10, 10, 0.5)",
         )
-
-    fig.add_shape(
-        type="line",
-        x0=-0.5,
-        x1=7.5,
-        y0=CLEAR_COUNT,
-        y1=CLEAR_COUNT,
-        line=dict(color="#ff4b4b", width=3),
-    )
 
     chart_placeholder.plotly_chart(fig, use_container_width=True)
 
