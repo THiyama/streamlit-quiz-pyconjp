@@ -26,27 +26,7 @@ TEAMS = {
 }
 
 
-@st.dialog("ユーザー名の確認")
-def prompt_for_duplicate_username_continue(team_id: str) -> None:
-    st.write("ユーザー名がすでに登録されているようです。")
-    st.write("このまま続けますか？")
-
-    col1, col2 = st.columns(2)
-    if col1.button("はい"):
-        st.session_state[f"is_prompt_for_{team_id}"] = True
-        st.rerun()
-
-    if col2.button("いいえ"):
-        st.session_state[f"is_prompt_for_{team_id}"] = False
-        st.rerun()
-
-
-def is_team_id_exists(session: Session, team_id: int) -> bool:
-    result = session.table("Submit2").filter(F.col("TEAM_ID") == team_id).count()
-
-    return result > 0
-
-
+@st.cache_resource(ttl=3600)
 def create_session(team_id: str, is_info: bool = True) -> Session:
     try:
         session = st.connection(team_id, type="snowflake", max_entries=1).session()
