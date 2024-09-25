@@ -88,7 +88,10 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
     https://info.streamlit.io/december-tokyo-meetup
     """
     )
-    expander.image("pages/common/images/user_image.png", width=300)
+    expander.image(
+        "https://www.snowflake.com/wp-content/uploads/2023/03/Screen-Shot-2023-04-03-at-3.48.30-PM-1.png",
+        width=300,
+    )
 
     st.divider()
     # ラジオボタンの選択肢を定義（番号付き）

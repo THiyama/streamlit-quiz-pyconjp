@@ -14,7 +14,6 @@ from utils.utils import (
 from utils.designs import (
     apply_default_custom_css,
     display_applied_message,
-    background_image,
 )
 
 
@@ -23,13 +22,10 @@ is_display_ranking = False
 num_display_ranking = 3
 
 st.title("📊挑戦状況")
-background_image("pages/common/images/background1.jpg")
 display_page_titles_sidebar()
 display_team_id_sidebar()
 get_team_id()
 
-with st.sidebar:
-    display_on_pc = st.toggle("文字サイズ：大")
 
 css_name = apply_default_custom_css()
 message = "ここでは、現在の挑戦状況を確認できます。\n\n"
@@ -60,6 +56,8 @@ for problem_id in problem_ids:
 
 
 st.subheader("問題ごとの正解数")
+
+display_on_pc = st.toggle("文字サイズ：大")
 chart_placeholder = st.empty()
 
 
