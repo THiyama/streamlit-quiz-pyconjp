@@ -4,4 +4,3 @@ showSidebarNavigation = false
 [theme]
 base = "dark"
 secondaryBackgroundColor = "#bd4043"
-font = "serif"
