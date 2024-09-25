@@ -7,13 +7,11 @@ from utils.utils import (
 from utils.designs import (
     apply_default_custom_css,
     display_applied_message,
-    background_image,
 )
 
 st.title(":balloon: ノベルティゲット")
 display_page_titles_sidebar()
 
-background_image("pages/common/images/background1.jpg")
 
 team_id = get_team_id()
 if f"{team_id}_display_preparation_message" not in st.session_state:
@@ -35,6 +33,6 @@ st.write("")
 st.write("まず、Streamlit Forum にアクセスして、ユーザー登録をしましょう。")
 st.link_button(label="Forum に進む", url="https://discuss.streamlit.io/")
 st.write(
-    "次に、Streamlit Forum に登録できたら（スタッフに確認してもらいましょう）、次の抽選に進みましょう！"
+    "Streamlit Forum に登録できたら（スタッフに確認してもらいましょう）、次の抽選に進みましょう！"
 )
 st.link_button(label="抽選に進む", url="https://pyconjp2024-st-lottery.streamlit.app/")

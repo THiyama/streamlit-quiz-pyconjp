@@ -11,7 +11,6 @@ from utils.utils import (
 from utils.designs import (
     apply_default_custom_css,
     display_applied_message,
-    background_image,
 )
 
 
@@ -64,7 +63,6 @@ message = f"""
 display_page_titles_sidebar()
 display_team_id_sidebar()
 display_applied_message(message, css_name)
-background_image("pages/common/images/background1.jpg", dark_mode=False)
 
 st.write("")
 

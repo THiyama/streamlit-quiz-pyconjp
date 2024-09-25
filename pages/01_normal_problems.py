@@ -17,7 +17,6 @@ from utils.utils import (
 from utils.designs import (
     apply_default_custom_css,
     display_applied_message,
-    background_image,
 )
 from utils.attempt_limiter import check_is_failed, update_failed_status
 
@@ -30,9 +29,10 @@ def get_module(module_path: str):
 display_page_titles_sidebar()
 
 st.title("💡クイズの間")
-background_image("pages/common/images/background1.jpg")
 
+display_team_id_sidebar()
 team_id = get_team_id()
+print(team_id)
 if f"{team_id}_display_preparation_message" not in st.session_state:
     st.session_state[f"{team_id}_display_preparation_message"] = True
 
@@ -47,7 +47,7 @@ display_applied_message(message, css_name)
 st.write("")
 
 session = get_session()
-display_team_id_sidebar()
+
 
 problems_dir = "pages/normal_problems"
 problem_files = [f for f in os.listdir(problems_dir) if f.endswith(".py")]

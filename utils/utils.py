@@ -79,7 +79,7 @@ def get_session():
 def display_page_titles_sidebar():
     with st.sidebar:
         st.page_link("app.py", label="ユーザー名の入力", icon="👥")
-        st.page_link("pages/01_normal_problems.py", label="クイズ", icon="⚔️")
+        st.page_link("pages/01_normal_problems.py", label="クイズ", icon="💡")
         st.page_link(
             "pages/03_aggregate_results.py", label="Overall Progress", icon="📊"
         )
@@ -89,10 +89,13 @@ def display_team_id_sidebar():
     with st.sidebar:
         try:
             st.divider()
-            if "team_id" in st.session_state:
-                st.write(f"ユーザー名: {st.session_state.team_id}")
-            else:
+            if "team_id" not in st.session_state:
                 st.write(f"ユーザー名: 未登録")
+
+            elif st.session_state.team_id == "":
+                st.write(f"ユーザー名: 未登録")
+            else:
+                st.write(f"ユーザー名: {st.session_state.team_id}")
         except AttributeError as e:
             print(e)
 
@@ -103,6 +106,11 @@ def display_team_id():
 
 def get_team_id():
     if "team_id" not in st.session_state:
+        st.warning("ユーザー名の入力ができていないようです。")
+        if st.button("ユーザー名入力に戻る"):
+            st.switch_page("app.py")
+        st.stop()
+    elif st.session_state.team_id == "":
         st.warning("ユーザー名の入力ができていないようです。")
         if st.button("ユーザー名入力に戻る"):
             st.switch_page("app.py")
@@ -231,7 +239,9 @@ def reset_problem_status() -> None:
 def clear_submit_button(placeholder, state):
     if st.session_state[f"{state['problem_id']}_{state['team_id']}_is_clear"]:
         placeholder.empty()
-        placeholder.success("このクイズには正解しました！")
+        placeholder.success(
+            "このクイズには正解しました！上のドロップダウンから、次の問題を選択してください。"
+        )
     elif st.session_state[f"{state['problem_id']}_{state['team_id']}_is_failed"]:
         placeholder.empty()
         placeholder.error("このクイズに挑戦するにはパワーが足りないみたいです。")
