@@ -2,7 +2,7 @@ import streamlit as st
 from snowflake.snowpark import Session
 
 from utils.utils import save_table, init_state, clear_submit_button, string_to_hash_int
-from utils.designs import header_animation, display_problem_statement
+from utils.designs import display_problem_statement
 from utils.attempt_limiter import check_is_failed, init_attempt, process_exceeded_limit
 
 MAX_ATTEMPTS_MAIN = 1000
@@ -19,7 +19,6 @@ ANSWER_OPTION = 2
 
 def present_quiz(tab_name: str, max_attempts: int) -> str:
 
-    header_animation()
     display_problem_statement(
         f"""
                               <div>

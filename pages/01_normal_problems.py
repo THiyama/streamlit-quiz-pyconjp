@@ -29,7 +29,7 @@ def get_module(module_path: str):
 
 display_page_titles_sidebar()
 
-st.title("⚔️挑戦の場")
+st.title("💡クイズの間")
 background_image("pages/common/images/background1.jpg")
 
 team_id = get_team_id()
