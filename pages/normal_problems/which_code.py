@@ -4,11 +4,12 @@ import pandas as pd
 from datetime import date
 
 from utils.utils import save_table, init_state, clear_submit_button, string_to_hash_int
-from utils.designs import header_animation, display_problem_statement
+from utils.designs import display_problem_statement
 from utils.attempt_limiter import check_is_failed, init_attempt, process_exceeded_limit
 
 MAX_ATTEMPTS_MAIN = 1000
 ANSWER_OPTIONS = ["No.1: st.number_input", "No.2: st.slider", "No.3: st.date_input"]
+
 
 def present_quiz(tab_name: str, max_attempts: int) -> str:
     # st.codeの背景色変更
@@ -18,7 +19,6 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     chart_data["日付"] = pd.to_datetime(chart_data["日付"])
     chart_data = chart_data.set_index("日付")
 
-    header_animation()
     # 設問表示
     display_problem_statement(
         f"""<p style="font-weight:bold; font-size: 24px; margin-bottom: 0;">下記の画面を実現するソースコードはどれでしょうか？</p>"""

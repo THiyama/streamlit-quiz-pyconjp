@@ -6,7 +6,7 @@ from snowflake.cortex import Complete as CompleteText
 
 from utils.utils import save_table, init_state, clear_submit_button
 from utils.attempt_limiter import check_is_failed, init_attempt, process_exceeded_limit
-from utils.designs import header_animation, display_problem_statement
+from utils.designs import display_problem_statement
 
 MAX_ATTEMPTS_MAIN = 1000
 
@@ -42,7 +42,6 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
     Returns:
         str: ユーザーが選択した答え。
     """
-    header_animation()
     st.header("このひとだあれ？？？", divider="rainbow")
 
     display_problem_statement(

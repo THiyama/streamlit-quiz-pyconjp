@@ -44,8 +44,8 @@ session = st.session_state.snow_session
 try:
     problem_ids = st.session_state.problem_ids
 except AttributeError as e:
-    st.warning("一度挑戦の場を訪れるが良い。")
-    if st.button("挑戦の場に行く"):
+    st.warning("一度クイズの間に行ってください")
+    if st.button("クイズの間に行く"):
         st.switch_page("pages/01_normal_problems.py")
     st.stop()
 
@@ -89,7 +89,7 @@ def update_chart():
         y="IS_CLEAR",
         color="color",
         color_discrete_map="identity",
-        labels={"problem_name": "", "IS_CLEAR": "正解チーム数"},
+        labels={"problem_name": "", "IS_CLEAR": "正解者数"},
         category_orders={"problem_name": pdf_problem_ids["problem_name"].tolist()},
     )
 

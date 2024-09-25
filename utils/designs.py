@@ -2,7 +2,6 @@ import streamlit as st
 
 
 DEFAULT_TOP_TEXT_AREA = "custom-text-area"
-DEFAULT_HEADER_ANIMATION_AREA = "custom-animation-header-area"
 DEFAULT_PROBLEM_STATEMENT_AREA = "custom-problem-statement-area"
 
 bright_streamlit = "#ff4b4b"
@@ -13,13 +12,7 @@ dark_streamlit = "#7d353b"
 def apply_default_custom_css():
     st.markdown(
         """
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap" rel="stylesheet">
         <style>
-        h1, h2, div, p {
-            font-family: "Zen Antique", serif !important;
-        }
         ."""
         + DEFAULT_TOP_TEXT_AREA
         + """ {
@@ -76,64 +69,6 @@ def display_applied_message(message: str, css_name: str = DEFAULT_TOP_TEXT_AREA)
         {message}
         """,
         unsafe_allow_html=True,
-    )
-
-
-@st.cache_data
-def header_animation(
-    css_name: str = DEFAULT_HEADER_ANIMATION_AREA,
-    image_file: str = "pages/common/images/background1.jpg",
-) -> None:
-    import base64
-
-    with open(image_file, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode()
-    st.html(
-        f"""
-        <div class="{css_name}">
-        </div>
-        <style>
-        .{css_name} {{
-            position:relative;
-            overflow:hidden;
-            box-shadow:0 4px 20px rgba(0, 0, 0, 0.2);
-            background-image: url(data:image/{"png"};base64,{encoded_string});
-            margin:0 auto;
-            width:300px;
-            height:30px;
-            margin: 0 calc(50% - 50vw);
-            width: 100vw;
-        }}
-        .{css_name}::before,
-        .{css_name}::after {{
-            position:absolute;
-            left:-50%;
-            width:200%;
-            height:200%;
-            content:"";
-            background-color:#1e50a2;
-            animation:wave linear 6s infinite;
-        }}
-        .{css_name}::before {{
-            top:-150%;
-            border-radius:50% 50% / 50% 70%;
-        }}
-        .{css_name}::after {{
-            top:-146%;
-            border-radius:30% 70% / 30% 50%;
-            opacity:0.2;
-            animation-delay:0.4s;
-        }}
-        @keyframes wave {{
-            from {{
-                transform:rotate(0deg);
-            }}
-            to {{
-                transform:rotate(360deg);
-            }}
-        }}
-        </style>
-        """
     )
 
 

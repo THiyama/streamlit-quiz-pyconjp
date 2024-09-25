@@ -78,8 +78,8 @@ def get_session():
 
 def display_page_titles_sidebar():
     with st.sidebar:
-        st.page_link("app.py", label="Gather Teams", icon="👥")
-        st.page_link("pages/01_normal_problems.py", label="Challenge Arena", icon="⚔️")
+        st.page_link("app.py", label="ユーザー名の入力", icon="👥")
+        st.page_link("pages/01_normal_problems.py", label="クイズ", icon="⚔️")
         st.page_link(
             "pages/03_aggregate_results.py", label="Overall Progress", icon="📊"
         )
@@ -92,7 +92,7 @@ def display_team_id_sidebar():
             if "team_id" in st.session_state:
                 st.write(f"ユーザー名: {st.session_state.team_id}")
             else:
-                st.write(f"ユーザー名: 未結成")
+                st.write(f"ユーザー名: 未登録")
         except AttributeError as e:
             print(e)
 
