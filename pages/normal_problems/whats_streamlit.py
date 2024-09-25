@@ -19,9 +19,9 @@ ANSWER_OPTION = 2
 
 def present_quiz(tab_name: str, max_attempts: int) -> str:
 
-    display_problem_statement(
+    st.markdown(
         f"""
-                              <div>
+                              <div style="background-color: rgb(239, 228, 176); padding: 40px 5%; color: #9e1717;">
                                 <p style="font-weight:bold; font-size: 24px; margin-bottom: 5px;">Streamlitとは？</p>
                                 <p>※最も適切な選択肢を選んでください。</p>
                                 <ol style="margin-top: 20px; color:#333; font-size: 18px; font-weight:bold;">
@@ -32,7 +32,7 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
                                 </ol>
                               </div>
                               """
-    )
+    , unsafe_allow_html=True)
     st.html(
         """<p style="font-weight:bold; font-size: 24px; margin-bottom: 0;">Your answer:</p>"""
     )

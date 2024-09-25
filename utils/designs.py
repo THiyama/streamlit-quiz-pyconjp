@@ -85,10 +85,7 @@ def get_image_base64(image_file: str) -> str:
 def display_problem_statement(
     html_message: str,
     css_name: str = DEFAULT_PROBLEM_STATEMENT_AREA,
-    image_file: str = "pages/common/images/quest.jpeg",
 ):
-
-    encoded_string = get_image_base64(image_file)
 
     st.html(
         f"""
@@ -101,12 +98,9 @@ def display_problem_statement(
                 border-radius: 10px;
             }}
             .{css_name} {{
-                background-color: rgba(2, 2, 2, 0);
-                background-image: url(data:image/{"jpeg"};base64,{encoded_string});
-                background-position: top;
+                background-color: rgb(239, 228, 176);
                 padding: 40px 5%;
                 color: #9e1717;
-                background-size: cover;
             }}
             </style>
         </p>

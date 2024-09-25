@@ -42,7 +42,7 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
     Returns:
         str: ユーザーが選択した答え。
     """
-    st.html("""<style>.stChatInput textarea::placeholder { color: #ccc !important; }</style>""")
+    st.html("""<style>.stChatInput textarea{ height:60px;} .stChatInput textarea::placeholder { color: #ccc !important; }</style>""")
     st.header("このひとだあれ？", divider="rainbow")
 
     display_problem_statement(
