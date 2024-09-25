@@ -8,9 +8,11 @@ from utils.designs import header_animation, display_problem_statement
 from utils.attempt_limiter import check_is_failed, init_attempt, process_exceeded_limit
 
 MAX_ATTEMPTS_MAIN = 1000
-
+ANSWER_OPTIONS = ["No.1: st.number_input", "No.2: st.slider", "No.3: st.date_input"]
 
 def present_quiz(tab_name: str, max_attempts: int) -> str:
+    # st.codeの背景色変更
+    st.html("""<style>.stCode pre {background-color: #333 !important;}</style>""")
     # データ読み込み
     chart_data = pd.read_csv("pages/common/data/tokyo_temperature.tsv", sep="\t")
     chart_data["日付"] = pd.to_datetime(chart_data["日付"])
@@ -101,14 +103,14 @@ def present_quiz(tab_name: str, max_attempts: int) -> str:
     )
     answer = st.radio(
         "",
-        ["No.1: st.number_input", "No.2: st.slider", "No.3: st.date_input"],
+        ANSWER_OPTIONS,
         index=None,
     )
     return answer
 
 
 def process_answer(answer: str, state, session: Session) -> None:
-    correct_answer = "No.3"
+    correct_answer = ANSWER_OPTIONS[2]
     if answer.lower() == correct_answer.lower():
         state["is_clear"] = True
         st.success("クイズに正解しました")

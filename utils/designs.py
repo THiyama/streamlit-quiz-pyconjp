@@ -162,6 +162,7 @@ def display_problem_statement(
                 background-position: top;
                 padding: 40px 5%;
                 color: #9e1717;
+                background-size: cover;
             }}
             </style>
         </p>
