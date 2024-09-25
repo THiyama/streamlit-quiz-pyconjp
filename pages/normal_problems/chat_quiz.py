@@ -42,44 +42,48 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
     Returns:
         str: ユーザーが選択した答え。
     """
-    st.header("このひとだあれ？？？", divider="rainbow")
+    st.header("このひとだあれ？", divider="rainbow")
 
     display_problem_statement(
         """
-                              <i>このひとだあれ？？？。
-                              あなたはAIとの会話からその人が誰なのかを当ててみてください</i><br />
-                              <br />
-                              職業や勤務先を聞いてみよう！難しければ、ヒントを見てみましょう。
+                              <p>AIとの会話から、人物を当ててみてください。</p>
+
+                              <p>まずは、チャットのUIから、職業や勤務先、Streamlitとの関わりを聞いてみよう！</p>
+                              
+                              <p>難しければ、ヒントを見てみましょう。</p>
                               """
     )
 
     initialize_chat_history()
 
-    chat_container = st.container()  # コンテナの高さは指定しない
-    display_chat_history(chat_container)
+    with st.container():
+        chat_container = st.container(height=300)
+        display_chat_history(chat_container)
 
-    prompt = st.chat_input("何か質問はありますか？")
+        if prompt := st.chat_input(
+            "ここから、職業や勤務先、Streamlitとの関わりを聞いてみましょう！"
+        ):
 
-    if prompt:
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with chat_container.chat_message("user"):
-            st.markdown(prompt)
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            with chat_container.chat_message("user"):
+                st.markdown(prompt)
 
-        with chat_container.chat_message(
-            "assistant", avatar="😺"
-        ):  # アバターを明確に設定
-            response = call_cortex_ai_model(
-                "snowflake-arctic", prompt, st.session_state.messages, session
-            )
-            st.session_state.messages.append(
-                {
-                    "role": "assistant",
-                    "content": response,
-                    "avatar": "😺",  # アバターもメッセージと共にセッションに保存
-                }
-            )
-            st.rerun()  # メッセージが更新されたら再描画
+            with chat_container.chat_message(
+                "assistant", avatar="😺"
+            ):  # アバターを明確に設定
+                response = call_cortex_ai_model(
+                    "snowflake-arctic", prompt, st.session_state.messages, session
+                )
+                st.session_state.messages.append(
+                    {
+                        "role": "assistant",
+                        "content": response,
+                        "avatar": "😺",  # アバターもメッセージと共にセッションに保存
+                    }
+                )
+                st.rerun()  # メッセージが更新されたら再描画
 
+    st.divider()
     expander = st.expander("ヒント💡")
     expander.write(
         """
@@ -93,7 +97,6 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
         width=300,
     )
 
-    st.divider()
     # ラジオボタンの選択肢を定義（番号付き）
     choices = [
         "1. Guido van Rossum",
@@ -125,14 +128,18 @@ def call_cortex_ai_model(
     prompt_text = f"""
     #命令文
     制約：
-    あなたのプロフィール情報は以下です。
-    ユーザーからの質問にたいしてプロフィール情報を元に回答してください。
-    聞かれた情報にだけ、一つずつ答えるようにしてください。
-    - 名前:??????
-    - 性別：女性
-    - 勤務先：Snowflake / Streamlit
-    - 仕事/職業/経歴:Streamlitの共同創業者で、現在はSnowflakeでプロダクトディレクターを担っています。
-    - 職場/住所:カリフォルニア
+    あなたは、Streamlitの共同創業者であり、現在はSnowflakeでプロダクトディレクターを務めるある女性です。
+    ユーザーが質問するたびに、少しずつ自分に関する情報を簡潔に開示してください。
+    ただし、自らの名前については、なるべく明かさないでください。それがユーザーが導く答えとなります。
+    また、他の情報はユーザーが質問したことだけに答え、余分な情報は提供しないでください。
+    - 名前: Amanda Kelly
+    - 性別: 女性
+    - 現在の役職: Snowflakeのプロダクトディレクター
+    - 経歴: Streamlitの共同創業者
+    - 業界: データ管理、AI/MLツール、クラウドソリューション
+    - 主な実績: Streamlitの共同創業者として、データサイエンスや機械学習アプリの構築に広く採用されているオープンソースツールを開発
+    - 所在地: カリフォルニア
+    - 職歴: Streamlitを共同創業し、StreamlitがSnowflakeに買収され、その後Snowflakeで、データエンジニアやデータサイエンティストのための革新的なソリューションを提供し、データ管理とプロダクト開発の未来を形作り続けている。
     Context: {context_str}
     Question: {prompt}
     Answer:

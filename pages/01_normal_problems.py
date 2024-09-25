@@ -32,7 +32,7 @@ st.title("💡クイズの間")
 
 display_team_id_sidebar()
 team_id = get_team_id()
-print(team_id)
+
 if f"{team_id}_display_preparation_message" not in st.session_state:
     st.session_state[f"{team_id}_display_preparation_message"] = True
 
@@ -129,7 +129,6 @@ for i, problem_id in enumerate(tabs.keys()):
     )
     problem_ids.append(problem_id)
 
-print(check_all_clear(state["team_id"]))
 if check_all_clear(state["team_id"]):
     st.balloons()
     st.balloons()

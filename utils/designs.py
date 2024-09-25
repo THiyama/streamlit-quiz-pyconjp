@@ -1,3 +1,5 @@
+import base64
+
 import streamlit as st
 
 
@@ -72,15 +74,22 @@ def display_applied_message(message: str, css_name: str = DEFAULT_TOP_TEXT_AREA)
     )
 
 
+@st.cache_data
+def get_image_base64(image_file: str) -> str:
+
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+    return encoded_string
+
+
 def display_problem_statement(
     html_message: str,
     css_name: str = DEFAULT_PROBLEM_STATEMENT_AREA,
     image_file: str = "pages/common/images/quest.jpeg",
 ):
-    import base64
 
-    with open(image_file, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode()
+    encoded_string = get_image_base64(image_file)
+
     st.html(
         f"""
         <p>
@@ -93,7 +102,7 @@ def display_problem_statement(
             }}
             .{css_name} {{
                 background-color: rgba(2, 2, 2, 0);
-                background-image: url(data:image/{"png"};base64,{encoded_string});
+                background-image: url(data:image/{"jpeg"};base64,{encoded_string});
                 background-position: top;
                 padding: 40px 5%;
                 color: #9e1717;
