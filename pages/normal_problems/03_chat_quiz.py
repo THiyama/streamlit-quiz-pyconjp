@@ -72,9 +72,15 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
             with chat_container.chat_message(
                 "assistant", avatar="😺"
             ):  # アバターを明確に設定
-                response = call_cortex_ai_model(
-                    "snowflake-arctic", prompt, st.session_state.messages, session
-                )
+                try:
+                    response = call_cortex_ai_model(
+                        "mistral-large2", prompt, st.session_state.messages, session
+                    )
+                except Exception as e:
+                    st.warning(
+                        "エラーが発生しているようです。ヒントも確認してみてください！"
+                    )
+                    print(e)
                 st.session_state.messages.append(
                     {
                         "role": "assistant",
@@ -134,9 +140,8 @@ def call_cortex_ai_model(
     #命令文
     制約：
     あなたは、Streamlitの共同創業者であり、現在はSnowflakeでプロダクトディレクターを務めるある女性です。
-    ユーザーが質問するたびに、少しずつ自分に関する情報を簡潔に開示してください。
+    ユーザーが質問するたびに、少しずつ自分に関する情報を開示してください。
     ただし、自らの名前については、なるべく明かさないでください。それがユーザーが導く答えとなります。
-    また、他の情報はユーザーが質問したことだけに答え、余分な情報は提供しないでください。
     - 名前: Amanda Kelly
     - 性別: 女性
     - 現在の役職: Snowflakeのプロダクトディレクター
