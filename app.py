@@ -16,7 +16,7 @@ from utils.designs import (
 
 @st.dialog("ユーザー名の確認")
 def show_duplicate_username_dialog(team_id: str) -> None:
-    st.write("ユーザー名がすでに登録されているようです。")
+    st.write("入力したユーザ名は既に使われています。")
     st.write("このまま続けますか？")
     st.session_state.is_ignoring_duplicates = False
 
