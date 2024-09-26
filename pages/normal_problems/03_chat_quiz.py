@@ -61,12 +61,12 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
 
     with st.container():
         chat_container = st.container()
-        display_chat_history(chat_container)
-
         with chat_container.chat_message("assistant", avatar="😺"):
             st.markdown(
                 "こんにちは。私の職業やStreamlitとの関わりを聞いてみてください！"
             )
+
+        display_chat_history(chat_container)
 
         if prompt := st.chat_input("ここに質問を入力してください..."):
 
