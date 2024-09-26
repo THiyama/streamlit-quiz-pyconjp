@@ -49,11 +49,11 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
 
     display_problem_statement(
         """
-                              <p>AIとの会話から、人物を当ててみてください。</p>
+                              <p>AIとの会話から、AIがなりきっている人物を当ててみてください。</p>
 
                               <p>まずは、チャットのUIから、職業や勤務先、Streamlitとの関わりを聞いてみよう！</p>
                               
-                              <p>難しければ、ヒントを見てみましょう。</p>
+                              <p>難しければ、ヒントも活用してみましょう💡</p>
                               """
     )
 
@@ -86,7 +86,7 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
 
     st.divider()
     with st.expander("ヒント💡"):
-        col1, col2 = st.columns([1, 3])
+        col1, col2 = st.columns([0.1, 0.9])
         with col1:
             st.image(
                 "https://www.snowflake.com/wp-content/uploads/2023/03/Screen-Shot-2023-04-03-at-3.48.30-PM-1.png",

@@ -28,7 +28,7 @@ def get_module(module_path: str):
 
 display_page_titles_sidebar()
 
-st.title("💡クイズの間")
+st.title("💡Streamlit クイズ")
 
 display_team_id_sidebar()
 team_id = get_team_id()
@@ -69,7 +69,7 @@ progress_text = "Loading..."
 progress_bar = st.progress(value=0, text=progress_text)
 total_steps = len(tabs.keys())
 
-for i, problem_id in enumerate(tabs.keys()):
+for i, problem_id in enumerate(sorted(list(tabs.keys()))):
     progress_bar.progress(int((i + 1) / total_steps * 100), progress_text)
     state["problem_id"] = problem_id
 

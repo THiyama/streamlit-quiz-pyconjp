@@ -11,9 +11,9 @@ from utils.attempt_limiter import check_is_failed, update_failed_status
 
 
 TAB_TITLES = {
-    "whats_streamlit": "Streamlitとは？",
-    "which_code": "どのコードが正しい？",
-    "chat_quiz": "このひとだあれ",
+    "01_whats_streamlit": "Streamlitとは？",
+    "02_which_code": "どのコードが正しい？",
+    "03_chat_quiz": "このひとだあれ",
 }
 
 
