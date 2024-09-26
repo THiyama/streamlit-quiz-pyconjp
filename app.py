@@ -74,15 +74,17 @@ st.session_state.team_id = team_id
 if "is_submitted_main_page" not in st.session_state:
     st.session_state.is_submitted_main_page = False
 
+
 st.button("挑戦を開始する", on_click=confirm_duplicate_username)
 
-if st.session_state.is_submitted_main_page:
-    if team_id == "":
-        st.error("ユーザー名を入力してみましょう！")
-    else:
-        if "is_ignoring_duplicates" not in st.session_state:
-            st.session_state.is_submitted_main_page = False
-            st.switch_page("pages/01_normal_problems.py")
-        elif st.session_state.is_ignoring_duplicates:
-            st.session_state.is_submitted_main_page = False
-            st.switch_page("pages/01_normal_problems.py")
+if not team_id == "":
+    if st.session_state.is_submitted_main_page:
+        if team_id == "":
+            st.error("ユーザー名を入力してみましょう！")
+        else:
+            if "is_ignoring_duplicates" not in st.session_state:
+                st.session_state.is_submitted_main_page = False
+                st.switch_page("pages/01_normal_problems.py")
+            elif st.session_state.is_ignoring_duplicates:
+                st.session_state.is_submitted_main_page = False
+                st.switch_page("pages/01_normal_problems.py")
