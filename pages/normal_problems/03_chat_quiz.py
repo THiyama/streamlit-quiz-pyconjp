@@ -43,7 +43,7 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
         str: ユーザーが選択した答え。
     """
     st.html(
-        """<style>.stChatInput textarea{ height:60px;} .stChatInput textarea::placeholder { color: #ccc !important; }</style>"""
+        """<style>.stChatInput textarea::placeholder { color: #ccc !important; }</style>"""
     )
     st.header("このひとだあれ？", divider="rainbow")
 
@@ -63,7 +63,12 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
         chat_container = st.container()
         display_chat_history(chat_container)
 
-        if prompt := st.chat_input("職業やStreamlitとの関わりを聞いてみましょう！"):
+        with chat_container.chat_message("assistant", avatar="😺"):
+            st.markdown(
+                "こんにちは。私の職業やStreamlitとの関わりを聞いてみてください！"
+            )
+
+        if prompt := st.chat_input("ここに質問を入力してください..."):
 
             st.session_state.messages.append({"role": "user", "content": prompt})
             with chat_container.chat_message("user"):
@@ -92,7 +97,7 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
 
     st.divider()
     with st.expander("ヒント💡"):
-        col1, col2 = st.columns([0.1, 0.9])
+        col1, col2 = st.columns([0.2, 0.8])
         with col1:
             st.image(
                 "https://www.snowflake.com/wp-content/uploads/2023/03/Screen-Shot-2023-04-03-at-3.48.30-PM-1.png",
