@@ -42,7 +42,9 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
     Returns:
         str: ユーザーが選択した答え。
     """
-    st.html("""<style>.stChatInput textarea{ height:60px;} .stChatInput textarea::placeholder { color: #ccc !important; }</style>""")
+    st.html(
+        """<style>.stChatInput textarea{ height:60px;} .stChatInput textarea::placeholder { color: #ccc !important; }</style>"""
+    )
     st.header("このひとだあれ？", divider="rainbow")
 
     display_problem_statement(
@@ -58,12 +60,10 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
     initialize_chat_history()
 
     with st.container():
-        chat_container = st.container(height=300)
+        chat_container = st.container()
         display_chat_history(chat_container)
 
-        if prompt := st.chat_input(
-            "ここから、職業や勤務先、Streamlitとの関わりを聞いてみましょう！"
-        ):
+        if prompt := st.chat_input("職業やStreamlitとの関わりを聞いてみましょう！"):
 
             st.session_state.messages.append({"role": "user", "content": prompt})
             with chat_container.chat_message("user"):
@@ -85,18 +85,22 @@ def ai_problem(tab_name: str, max_attempts: int, session: Session) -> Optional[s
                 st.rerun()  # メッセージが更新されたら再描画
 
     st.divider()
-    expander = st.expander("ヒント💡")
-    expander.write(
-        """
-    私はStreamlitの共同創業者です！ペットは犬を飼っています。
-    昨年末、Streamlitのコミュニティイベントにも来日しましたよ！
-    https://info.streamlit.io/december-tokyo-meetup
-    """
-    )
-    expander.image(
-        "https://www.snowflake.com/wp-content/uploads/2023/03/Screen-Shot-2023-04-03-at-3.48.30-PM-1.png",
-        width=300,
-    )
+    with st.expander("ヒント💡"):
+        col1, col2 = st.columns([1, 3])
+        with col1:
+            st.image(
+                "https://www.snowflake.com/wp-content/uploads/2023/03/Screen-Shot-2023-04-03-at-3.48.30-PM-1.png",
+                width=40,
+            )
+
+        with col2:
+            st.write(
+                """
+                私はStreamlitの共同創業者です！ペットは犬を飼っています。
+                昨年末、Streamlitのコミュニティイベントにも来日しましたよ！
+                [イベント詳細](https://info.streamlit.io/december-tokyo-meetup)
+                """
+            )
 
     # ラジオボタンの選択肢を定義（番号付き）
     choices = [
@@ -137,10 +141,10 @@ def call_cortex_ai_model(
     - 性別: 女性
     - 現在の役職: Snowflakeのプロダクトディレクター
     - 経歴: Streamlitの共同創業者
-    - 業界: データ管理、AI/MLツール、クラウドソリューション
+    - 業界: アプリ、データ、AI/MLツール
     - 主な実績: Streamlitの共同創業者として、データサイエンスや機械学習アプリの構築に広く採用されているオープンソースツールを開発
     - 所在地: カリフォルニア
-    - 職歴: Streamlitを共同創業し、StreamlitがSnowflakeに買収され、その後Snowflakeで、データエンジニアやデータサイエンティストのための革新的なソリューションを提供し、データ管理とプロダクト開発の未来を形作り続けている。
+    - 職歴: Streamlitを共同創業し、StreamlitがSnowflakeに買収され、その後Snowflakeで、データエンジニアやデータサイエンティストのための革新的なソリューションを提供している。
     Context: {context_str}
     Question: {prompt}
     Answer:
