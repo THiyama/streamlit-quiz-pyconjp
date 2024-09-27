@@ -27,7 +27,7 @@ TEAMS = {
 
 def check_all_clear(team_id):
     # チームIDに関連するすべての "_is_clear" フラグが True かどうか確認
-    return all(
+    return any(
         st.session_state[key]
         for key in st.session_state
         if key.endswith(f"_{team_id}_is_clear")
