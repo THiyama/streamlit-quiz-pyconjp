@@ -239,9 +239,7 @@ def reset_problem_status() -> None:
 def clear_submit_button(placeholder, state):
     if st.session_state[f"{state['problem_id']}_{state['team_id']}_is_clear"]:
         placeholder.empty()
-        placeholder.success(
-            "このクイズには正解しました！上のドロップダウンから、次の問題を選択してください。"
-        )
+        placeholder.success("このクイズには正解しました！")
     elif st.session_state[f"{state['problem_id']}_{state['team_id']}_is_failed"]:
         placeholder.empty()
         placeholder.error("このクイズに挑戦するにはパワーが足りないみたいです。")
