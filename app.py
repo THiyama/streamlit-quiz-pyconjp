@@ -50,7 +50,7 @@ st.title("Streamlit クイズへようこそ！")
 css_name = apply_default_custom_css()
 message = f"""
     PyCon JP の Streamlit ブースに遊びに来ていただきありがとうございます！
-    このアプリでは、Streamlit に関する3つのクイズに挑戦します。
+    このアプリでは、Streamlit に関するクイズに挑戦します。
 
     クイズにクリアして、**ステッカーやノベルティ** をゲットしましょう！
     
