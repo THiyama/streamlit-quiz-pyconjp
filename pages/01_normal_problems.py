@@ -40,7 +40,7 @@ css_name = apply_default_custom_css()
 message = f"""
     いらっしゃい、**{team_id}** さん！
 
-    3つのクイズに挑戦して、ステッカーやノベルティをゲットしましょう！
+    ３つのクイズから好きな問題に1つ挑戦して、ステッカーやノベルティをゲットしましょう！
     """
 display_applied_message(message, css_name)
 
