@@ -6,7 +6,7 @@ import importlib
 
 from utils.utils import (
     check_is_clear,
-    check_all_clear,
+    check_any_clear,
     update_clear_status,
     display_page_titles_sidebar,
     display_team_id_sidebar,
@@ -179,15 +179,17 @@ tabs[selected_problem_id].run(selected_problem_id, session)
 progress_bar.empty()
 
 
-if check_all_clear(state["team_id"]):
-    st.balloons()
-    st.balloons()
-    st.balloons()
+if check_any_clear(state["team_id"]):
+    if "is_first_clear" not in st.session_state:
+        st.session_state.is_first_clear = True
+    if st.session_state.is_first_clear:
+        st.balloons()
+        st.session_state.is_first_clear = False
     st.success(
         """
-        あなたはすべてのクイズに正解しました！
         ステッカーをスタッフから受け取ってください。
         Streamlit Forum に登録することで、さらにノベルティをゲットできます！
+        他の問題にもぜひ挑戦してみよう！🥳
     """
     )
     if st.button("さらなるノベルティ獲得に進む", type="primary"):
