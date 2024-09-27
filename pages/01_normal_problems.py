@@ -129,20 +129,6 @@ for i, problem_id in enumerate(sorted(list(tabs.keys()))):
     )
     problem_ids.append(problem_id)
 
-if check_all_clear(state["team_id"]):
-    st.balloons()
-    st.balloons()
-    st.balloons()
-    st.success(
-        """
-        あなたはすべてのクイズに正解しました！
-        ステッカーをスタッフから受け取ってください。
-        Streamlit Forum に登録することで、さらにノベルティをゲットできます！
-    """
-    )
-    if st.button("さらなるノベルティ獲得に進む", type="primary"):
-        st.switch_page("pages/02_get_additional_novelty.py")
-
 
 success_placeholder = st.empty()
 if st.session_state[f"{team_id}_display_preparation_message"]:
@@ -191,3 +177,18 @@ tabs[selected_problem_id].run(selected_problem_id, session)
 
 
 progress_bar.empty()
+
+
+if check_all_clear(state["team_id"]):
+    st.balloons()
+    st.balloons()
+    st.balloons()
+    st.success(
+        """
+        あなたはすべてのクイズに正解しました！
+        ステッカーをスタッフから受け取ってください。
+        Streamlit Forum に登録することで、さらにノベルティをゲットできます！
+    """
+    )
+    if st.button("さらなるノベルティ獲得に進む", type="primary"):
+        st.switch_page("pages/02_get_additional_novelty.py")
