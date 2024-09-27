@@ -25,7 +25,7 @@ TEAMS = {
 }
 
 
-def check_all_clear(team_id):
+def check_any_clear(team_id):
     # チームIDに関連するすべての "_is_clear" フラグが True かどうか確認
     return any(
         st.session_state[key]
